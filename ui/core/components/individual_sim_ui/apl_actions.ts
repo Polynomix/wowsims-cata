@@ -592,7 +592,12 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		shortDescription: 'Swaps items, using the swap set specified in Settings.',
 		includeIf: (player: Player<any>, _isPrepull: boolean) => itemSwapEnabledSpecs.includes(player.getSpec()),
 		newValue: () => APLActionItemSwap.create(),
-		fields: [itemSwapSetFieldConfig('swapSet')],
+		fields: [
+			itemSwapSetFieldConfig('swapSet'),
+			AplHelpers.booleanFieldConfig('isWeaponSwap', 'Swap Weapon', {
+				labelTooltip: 'If checked, will only swap weapons. If not checked, will swap everything but weapons.',
+			}),
+		],
 	}),
 	['move']: inputBuilder({
 		label: 'Move',

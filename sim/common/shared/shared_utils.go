@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/cata/sim/core"
+	"github.com/wowsims/cata/sim/core/proto"
 	"github.com/wowsims/cata/sim/core/stats"
 )
 
@@ -26,6 +27,9 @@ type ProcStatBonusEffect struct {
 
 	// Any other custom proc conditions not covered by the above fields.
 	CustomProcCondition core.CustomStatBuffProcCondition
+
+	//Used to know which slot this effect is associated with
+	ItemSlot proto.ItemSlot
 }
 
 type DamageEffect struct {
@@ -148,6 +152,7 @@ func factory_StatBonusEffect(config ProcStatBonusEffect, extraSpell func(agent c
 
 		procAura.Icd = triggerAura.Icd
 		character.TrinketProcBuffs = append(character.TrinketProcBuffs, procAura)
+		character.ItemSwap.RegisterOnSwapItemForItemProcEffect(config.ID, triggerAura, core.EligibleSlotsForItem(core.GetItemByID(config.ID), false))
 	})
 }
 

@@ -100,5 +100,6 @@ func (eleShaman *ElementalShaman) GetShaman() *shaman.Shaman {
 }
 
 func (eleShaman *ElementalShaman) Reset(sim *core.Simulation) {
+	//eleShaman.ApplyArmorSpecializationEffect(stats.Intellect, proto.ArmorType_ArmorTypeMail)
 	eleShaman.Shaman.Reset(sim)
 }

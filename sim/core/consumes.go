@@ -974,6 +974,7 @@ func registerTinkerHandsCD(agent Agent, consumes *proto.Consumes) {
 			Priority: CooldownPriorityLow,
 			Type:     CooldownTypeDPS,
 		})
+		character.ItemSwap.RegisterOnSwapItemForEnchantOnUseEffect(spell, []proto.ItemSlot{proto.ItemSlot_ItemSlotHands})
 	case proto.TinkerHands_TinkerHandsQuickflipDeflectionPlates:
 		// Enchant: 4180, Spell: 82176 - Quickflip Deflection Plates
 		statAura := character.NewTemporaryStatsAura(
@@ -1005,6 +1006,7 @@ func registerTinkerHandsCD(agent Agent, consumes *proto.Consumes) {
 			Priority: CooldownPriorityLow,
 			Type:     CooldownTypeSurvival,
 		})
+		character.ItemSwap.RegisterOnSwapItemForEnchantOnUseEffect(spell, []proto.ItemSlot{proto.ItemSlot_ItemSlotHands})
 	case proto.TinkerHands_TinkerHandsTazikShocker:
 		// Enchant: 4181, Spell: 82180 - Tazik Shocker
 		spell := character.GetOrRegisterSpell(SpellConfig{
@@ -1036,6 +1038,7 @@ func registerTinkerHandsCD(agent Agent, consumes *proto.Consumes) {
 			Priority: CooldownPriorityLow,
 			Type:     CooldownTypeDPS,
 		})
+		character.ItemSwap.RegisterOnSwapItemForEnchantOnUseEffect(spell, []proto.ItemSlot{proto.ItemSlot_ItemSlotHands})
 	case proto.TinkerHands_TinkerHandsSpinalHealingInjector:
 		// Enchant: 4182, Spell: 82184 - Spinal Healing Injector
 		healthMetric := character.NewHealthMetrics(ActionID{SpellID: 82184})
@@ -1066,6 +1069,7 @@ func registerTinkerHandsCD(agent Agent, consumes *proto.Consumes) {
 			Priority: CooldownPriorityLow,
 			Type:     CooldownTypeSurvival,
 		})
+		character.ItemSwap.RegisterOnSwapItemForEnchantOnUseEffect(spell, []proto.ItemSlot{proto.ItemSlot_ItemSlotHands})
 	case proto.TinkerHands_TinkerHandsZ50ManaGulper:
 		// Enchant: 4183, Spell: 82186 - Z50 Mana Gulper
 		manaMetric := character.NewManaMetrics(ActionID{SpellID: 82186})
@@ -1101,5 +1105,6 @@ func registerTinkerHandsCD(agent Agent, consumes *proto.Consumes) {
 			Priority: CooldownPriorityLow,
 			Type:     CooldownTypeMana,
 		})
+		character.ItemSwap.RegisterOnSwapItemForEnchantOnUseEffect(spell, []proto.ItemSlot{proto.ItemSlot_ItemSlotHands})
 	}
 }

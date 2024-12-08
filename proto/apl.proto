@@ -295,6 +295,7 @@ message APLActionItemSwap {
 
     // The set to swap to.
     SwapSet swap_set = 1;
+    bool is_weapon_swap = 2;
 }
 
 message APLActionCatOptimalRotationAction {

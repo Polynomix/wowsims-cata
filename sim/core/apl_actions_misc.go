@@ -122,8 +122,9 @@ func (action *APLActionTriggerICD) String() string {
 
 type APLActionItemSwap struct {
 	defaultAPLActionImpl
-	character *Character
-	swapSet   proto.APLActionItemSwap_SwapSet
+	character    *Character
+	swapSet      proto.APLActionItemSwap_SwapSet
+	isWeaponSwap bool
 }
 
 func (rot *APLRotation) newActionItemSwap(config *proto.APLActionItemSwap) APLActionImpl {
@@ -141,19 +142,21 @@ func (rot *APLRotation) newActionItemSwap(config *proto.APLActionItemSwap) APLAc
 	}
 
 	return &APLActionItemSwap{
-		character: character,
-		swapSet:   config.SwapSet,
+		character:    character,
+		swapSet:      config.SwapSet,
+		isWeaponSwap: config.IsWeaponSwap,
 	}
 }
 func (action *APLActionItemSwap) IsReady(sim *Simulation) bool {
-	return (action.swapSet == proto.APLActionItemSwap_Main) == action.character.ItemSwap.IsSwapped()
+	return (action.isWeaponSwap && (action.swapSet == proto.APLActionItemSwap_Main) == action.character.ItemSwap.IsWeaponSwapped()) ||
+		(!action.isWeaponSwap && sim.CurrentTime <= 0 && (action.swapSet == proto.APLActionItemSwap_Main) == action.character.ItemSwap.IsNonWeaponSwapped())
 }
 func (action *APLActionItemSwap) Execute(sim *Simulation) {
 	if sim.Log != nil {
 		action.character.Log(sim, "Item Swap to set %s", action.swapSet)
 	}
 
-	action.character.ItemSwap.SwapItems(sim, action.character.ItemSwap.slots)
+	action.character.ItemSwap.Swap(sim, action.character.ItemSwap.slots, action.isWeaponSwap)
 }
 func (action *APLActionItemSwap) String() string {
 	return fmt.Sprintf("Item Swap(%s)", action.swapSet)
