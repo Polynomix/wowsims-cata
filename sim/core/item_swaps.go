@@ -152,7 +152,7 @@ func (swap *ItemSwap) RegisterOnSwapItemUpdateProcMaskWithPPMManager(procMask Pr
 	})
 }
 
-// Helper for handling Effects that use the itemID to toggle the aura on and off
+// Helper for handling Item Effects that use the itemID to toggle the aura on and off
 func (swap *ItemSwap) RegisterOnSwapItemForItemProcEffect(itemID int32, aura *Aura, slots []proto.ItemSlot) {
 	character := swap.character
 	character.RegisterOnItemSwap(slots, func(sim *Simulation, slot proto.ItemSlot) {
@@ -171,7 +171,7 @@ func (swap *ItemSwap) RegisterOnSwapItemForItemProcEffect(itemID int32, aura *Au
 	})
 }
 
-// Helper for handling Effects that use the effectID to toggle the aura on and off
+// Helper for handling Enchant Effects that use the effectID to toggle the aura on and off
 func (swap *ItemSwap) RegisterOnSwapItemForEnchantProcEffect(effectID int32, aura *Aura, slots []proto.ItemSlot) {
 	character := swap.character
 	character.RegisterOnItemSwap(slots, func(sim *Simulation, slot proto.ItemSlot) {
@@ -185,7 +185,7 @@ func (swap *ItemSwap) RegisterOnSwapItemForEnchantProcEffect(effectID int32, aur
 	})
 }
 
-// Helper for handling On Use effects to set a 30s cd. On use trinkets are handled separately than this
+// Helper for handling Item On Use effects to set a 30s cd on the related spell.
 func (swap *ItemSwap) RegisterOnSwapItemForItemOnUseEffect(itemID int32, slots []proto.ItemSlot) {
 	character := swap.character
 	character.RegisterOnItemSwap(slots, func(sim *Simulation, slot proto.ItemSlot) {
@@ -205,6 +205,7 @@ func (swap *ItemSwap) RegisterOnSwapItemForItemOnUseEffect(itemID int32, slots [
 	})
 }
 
+// Helper for handling Enchant On Use effects to set a 30s cd on the related spell.
 func (swap *ItemSwap) RegisterOnSwapItemForEnchantOnUseEffect(spell *Spell, slots []proto.ItemSlot) {
 	character := swap.character
 	character.RegisterOnItemSwap(slots, func(sim *Simulation, slot proto.ItemSlot) {
@@ -360,7 +361,7 @@ func (swap *ItemSwap) swapWeapon(slot proto.ItemSlot) {
 	}
 }
 
-func (swap *ItemSwap) swapTrinketEffect(sim *Simulation, slot proto.ItemSlot, newItem *Item, oldItem *Item) {
+/*func (swap *ItemSwap) swapTrinketEffect(sim *Simulation, slot proto.ItemSlot, newItem *Item, oldItem *Item) {
 	if slot == proto.ItemSlot_ItemSlotTrinket1 || slot == proto.ItemSlot_ItemSlotTrinket2 {
 
 		oldAura := swap.character.GetIcdAuraByID(ActionID{
@@ -384,7 +385,7 @@ func (swap *ItemSwap) swapTrinketEffect(sim *Simulation, slot proto.ItemSlot, ne
 			newSpell.CD.Set(sim.CurrentTime + time.Second*30)
 		}
 	}
-}
+}*/
 
 func (swap *ItemSwap) reset(sim *Simulation) {
 	if !swap.IsEnabled() {

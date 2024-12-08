@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/cata/sim/core"
-	"github.com/wowsims/cata/sim/core/proto"
 	"github.com/wowsims/cata/sim/core/stats"
 )
 
@@ -27,9 +26,6 @@ type ProcStatBonusEffect struct {
 
 	// Any other custom proc conditions not covered by the above fields.
 	CustomProcCondition core.CustomStatBuffProcCondition
-
-	//Used to know which slot this effect is associated with
-	ItemSlot proto.ItemSlot
 }
 
 type DamageEffect struct {

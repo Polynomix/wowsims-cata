@@ -345,7 +345,7 @@ func (character *Character) applyItemEffects(agent Agent) {
 	}
 
 	if character.ItemSwap.IsEnabled() {
-		offset := int(proto.ItemSlot_ItemSlotTrinket1)
+		offset := int(proto.ItemSlot_ItemSlotMainHand)
 		for i, item := range character.ItemSwap.unEquippedItems {
 			if applyItemEffect, ok := itemEffects[item.ID]; ok {
 				applyItemEffect(agent)
